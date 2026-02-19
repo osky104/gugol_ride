@@ -22,7 +22,7 @@
             // Costanti per il Database
             private final String DRIVER = "com.mysql.cj.jdbc.Driver";
             private final String NAME = "gugolRide";
-            private final String URL_mioDB = "jdbc:mysql://localhost:3306/" + NAME;
+            private final String URL_mioDB = "jdbc:mysql://localhost:3306/";
             private final String userName = "root";
             private final String password = "";
         %>
@@ -51,15 +51,16 @@
                     + "Path VARCHAR(267) UNIQUE NOT NULL,"
                     + "Nome VARCHAR(50) NOT NULL,"
                     + "Tipo CHAR(1) NOT NULL,"
-                    + "Proprietario VARCHAR(20) NOT NULL FOREIGN KEY REFERENCES Utente(Username)"
+                    + "Proprietario VARCHAR(20) NOT NULL,"
+                    + "FOREIGN KEY (Proprietario) REFERENCES Utente(Username)"
                 + ")");
                 
                 statement.execute("CREATE TABLE IF NOT EXISTS Permesso ("
                     + "Username VARCHAR(20),"
                     + "Id INT,"
                     + "PRIMARY KEY (Username, Id),"
-                    + "FOREIGN KEY(Username) REFERENCES Utente(Username)"
-                    + "FOREIGN KEY(Id) REFERENCES Utente(Id)"
+                    + "FOREIGN KEY(Username) REFERENCES Utente(Username),"
+                    + "FOREIGN KEY(Id) REFERENCES File(Id)"
                 + ")");
 
             } catch (ClassNotFoundException e) {

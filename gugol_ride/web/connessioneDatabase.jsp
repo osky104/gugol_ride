@@ -15,11 +15,26 @@
     private final String URL_mioDB = "jdbc:mysql://localhost:3306/";
     private final String userName = "root";
     private final String password = "";
-%>
-<%
+
     Connection connect = null;
     Statement statement = null;
     ResultSet result = null;
+
+    public void closeConnection(){
+        try {
+            if (result != null) result.close();
+            if (statement != null) statement.close();
+            if (connect != null) connect.close();
+        } catch (SQLException e) {
+%>
+
+            <p class='error'>Errore chiusura risorse: " + e.getMessage()</p>
+            <%
+        }
+    }
+%>
+<%
+    
 
     try {
         Class.forName(DRIVER);
@@ -57,14 +72,5 @@
         out.println("<p class='error'>Errore: Driver non trovato</p>");
     } catch (SQLException e) {
         out.println("<p class='error'>Errore database: " + e.getMessage() + " </p>");
-    } finally {
-        // Chiusura risorse nel blocco finally per sicurezza
-        try {
-            if (result != null) result.close();
-            if (statement != null) statement.close();
-            if (connect != null) connect.close();
-        } catch (SQLException e) {
-            out.println("<p class='error'>Errore chiusura risorse: " + e.getMessage() + "</p>");
-        }
     }
 %>

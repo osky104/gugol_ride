@@ -20,17 +20,10 @@
     Statement statement = null;
     ResultSet result = null;
 
-    public void closeConnection(){
-        try {
-            if (result != null) result.close();
-            if (statement != null) statement.close();
-            if (connect != null) connect.close();
-        } catch (SQLException e) {
-%>
-
-            <p class='error'>Errore chiusura risorse: " + e.getMessage()</p>
-            <%
-        }
+    public void closeConnection() throws SQLException{
+        if (result != null) result.close();
+        if (statement != null) statement.close();
+        if (connect != null) connect.close();
     }
 %>
 <%

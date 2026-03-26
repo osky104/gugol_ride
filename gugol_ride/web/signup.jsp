@@ -24,17 +24,21 @@
        
 
         <%
-            if(request.getMethod().equals("POST")){
-                String user = request.getParameter("username");
-                String password = request.getParameter("password");
+            //try{
+                if(request.getMethod().equals("POST")){
+                    String user = request.getParameter("username");
+                    String password = request.getParameter("password");
 
-                result = statement.executeQuery("SELECT * FROM utente WHERE username = " + user);
-                if(!result.wasNull()){ //nn va un cazzo
-                    statement.execute("INSERT INTO utente(Username, Password, PathCartella) VALUES("+ user + ", "+ password + ")");
+                    result = statement.executeQuery("SELECT * FROM utente WHERE username = '" + user + "'");
+                    if(!result.next()){
+                        statement.execute("INSERT INTO utente(Username, Password, PathCartella) VALUES('"+ user + "', '"+ password + "', '')");
+                    }
                 }
-            
-            }
-            
+            /*} catch(Exception e){
+                out.println("<p class='error'>Errore database: " + e.getMessage() + " </p>");
+            } finally{
+                closeConnection();
+            }*/
         %>
         
     </body>

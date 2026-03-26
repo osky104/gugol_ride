@@ -4,6 +4,7 @@
     Author     : oscar.farina
 --%>
 
+<%@page import="java.io.File"%>
 <%@include file="connessioneDatabase.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,21 +25,27 @@
        
 
         <%
-            //try{
+            try{
                 if(request.getMethod().equals("POST")){
                     String user = request.getParameter("username");
                     String password = request.getParameter("password");
+                    String path = "";
 
                     result = statement.executeQuery("SELECT * FROM utente WHERE username = '" + user + "'");
-                    if(!result.next()){
+                    //True se il risultato è vuoto
+                    /*if(!result.next()){
                         statement.execute("INSERT INTO utente(Username, Password, PathCartella) VALUES('"+ user + "', '"+ password + "', '')");
-                    }
+                    }*/
+                    
+                    File file = new File("");
+                    out.println(file.getAbsolutePath());
+                    out.println("Funzia: " + file.exists());
                 }
-            /*} catch(Exception e){
+            } catch(Exception e){
                 out.println("<p class='error'>Errore database: " + e.getMessage() + " </p>");
             } finally{
                 closeConnection();
-            }*/
+            }
         %>
         
     </body>

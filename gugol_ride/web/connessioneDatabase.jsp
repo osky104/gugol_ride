@@ -40,8 +40,7 @@
 
         statement.execute("CREATE TABLE IF NOT EXISTS Utente ("
             + "Username VARCHAR(20) PRIMARY KEY,"
-            + "Password VARCHAR(20) NOT NULL,"
-            + "PathCartella VARCHAR(267) NOT NULL"
+            + "Password VARCHAR(20) NOT NULL"
         + ")");
 
         statement.execute("CREATE TABLE IF NOT EXISTS File ("

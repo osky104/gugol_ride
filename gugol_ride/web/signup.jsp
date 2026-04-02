@@ -29,9 +29,15 @@
                     result = statement.executeQuery("SELECT * FROM utente WHERE username = '" + user + "'");
                     //True se il risultato è vuoto
                     if(!result.next()){
-                        statement.execute("INSERT INTO utente(Username, Password, PathCartella) VALUES('"+ user + "', '"+ password + "', '')");
+                        statement.execute("INSERT INTO utente(Username, Password) VALUES('"+ user + "', '"+ password + "')");
+                        
+                        File userFolder = new File(USER_FILES_PATH + user);
+                        userFolder.mkdir();
+                        
+                        response.sendRedirect("index.jsp");
+                    } else {
+                        out.println("<p class='error'>Utente già esistente</p>");
                     }
-                    
                 }
             } catch(Exception e){
                 out.println("<p class='error'>Errore database: " + e.getMessage() + " </p>");

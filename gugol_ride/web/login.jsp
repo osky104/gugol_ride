@@ -27,6 +27,9 @@
                     result = statement.executeQuery("SELECT * FROM utente WHERE username = '" + user + "' AND password = '" + password + "'");
                     if(!result.next()){ //se è vuoto
                         out.println("<p class='error'>Username o password errati! </p>"); 
+                    } else {
+                        userLog = user;
+                        response.sendRedirect("index.jsp");
                     }
                 }
             } catch(Exception e){

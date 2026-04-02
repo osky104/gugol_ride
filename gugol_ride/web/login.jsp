@@ -1,10 +1,5 @@
-<%-- 
-    Document   : login
-    Created on : 26 mar 2026, 12:18:17
-    Author     : oscar.farina
---%>
 
-<%@include file="connessioneDatabase.jsp" %>
+<%@include file="config.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : connessioneDatabase
-    Created on : 26 feb 2026, 12:32:38
-    Author     : oscar.farina
---%>
 
 <%@page import="java.sql.*"%>
 <%@page import="java.util.*" %>
@@ -15,6 +10,7 @@
     private final String URL_mioDB = "jdbc:mysql://localhost:3306/";
     private final String userName = "root";
     private final String password = "";
+    String UserLog = "";
 
     Connection connect = null;
     Statement statement = null;

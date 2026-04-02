@@ -1,11 +1,6 @@
-<%-- 
-    Document   : signup
-    Created on : 26 feb 2026, 12:05:11
-    Author     : oscar.farina
---%>
 
 <%@page import="java.io.File"%>
-<%@include file="connessioneDatabase.jsp" %>
+<%@include file="config.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -33,13 +28,10 @@
 
                     result = statement.executeQuery("SELECT * FROM utente WHERE username = '" + user + "'");
                     //True se il risultato è vuoto
-                    /*if(!result.next()){
+                    if(!result.next()){
                         statement.execute("INSERT INTO utente(Username, Password, PathCartella) VALUES('"+ user + "', '"+ password + "', '')");
-                    }*/
+                    }
                     
-                    File file = new File("");
-                    out.println(file.getAbsolutePath());
-                    out.println("Funzia: " + file.exists());
                 }
             } catch(Exception e){
                 out.println("<p class='error'>Errore database: " + e.getMessage() + " </p>");

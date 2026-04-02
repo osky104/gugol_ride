@@ -13,6 +13,66 @@
 
         <a href="signup.jsp">SIGN UP</a>
         <a href="login.jsp">LOGIN</a>
+        
+        <%
+            /*
+            // --- 1. LOGICA SESSIONE E COOKIE ---
+            // Gestione Sessione
+            LocalDate ld = LocalDate.now();
+            if (session.getAttribute("data_corrente") == null) {
+                session.setAttribute("data_corrente", ld);
+            }
+            String dataSessione = String.valueOf(session.getAttribute("data_corrente"));
+
+            // Gestione Cookie
+            Cookie c = new Cookie("ultima_data", ld.toString());
+            c.setMaxAge(3600); // Scadenza 1 ora
+            response.addCookie(c);
+
+            String dataDaCookie = "Nessun cookie trovato (è la tua prima visita o sono scaduti)";
+            Cookie[] elencoCookie = request.getCookies();
+            if (elencoCookie != null) {
+                for (Cookie temp : elencoCookie) {
+                    if (temp.getName().equals("ultima_data")) {
+                        dataDaCookie = temp.getValue();
+                    }
+                }
+            }
+            */
+
+            
+            if(UserLog != null){
+                result = statement.executeQuery("SELECT f.* FROM utente u, permesso p, file f WHERE u.Username = p.Username AND p.Id = f.Id AND u.Username = '" + userLog + "'");
+            }   
+        %>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Path</th>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Proprietario</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% while (result.next()) { %>
+                <tr>
+                    <td><%= result.getInt("Id") %></td>
+                    <td><%= result.getString("Path") %></td>
+                    <td><%= result.getString("Nome") %></td>
+                    <td><%= result.getString("Tipo") %></td>
+                    <td><%= result.getString("Proprietario") %></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+        
+        
 
     </body>
+    
 </html>
+
+

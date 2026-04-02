@@ -25,7 +25,7 @@
     }
 %>
 <%
-    out.println("<h1>TODO: cookie e sessoni + idFile in 'permessi'</h1>");
+    out.println("<h1>TODO: cookie logout per inattività</h1>");
     try {
         Class.forName(DRIVER);
         connect = DriverManager.getConnection(URL_mioDB, userName, password);
@@ -45,17 +45,17 @@
                 + "Id INT AUTO_INCREMENT PRIMARY KEY,"
                 + "Path VARCHAR(267) UNIQUE NOT NULL,"
                 + "Nome VARCHAR(50) NOT NULL,"
-                + "Tipo CHAR(1) NOT NULL,"
+                + "Cartella BOOLEAN NOT NULL,"
                 + "Proprietario VARCHAR(20) NOT NULL,"
                 + "FOREIGN KEY (Proprietario) REFERENCES Utente(Username)"
             + ")");
 
             statement.execute("CREATE TABLE IF NOT EXISTS Permesso ("
                 + "Username VARCHAR(20),"
-                + "Id INT,"
-                + "PRIMARY KEY (Username, Id),"
+                + "IdFile INT,"
+                + "PRIMARY KEY (Username, IdFile),"
                 + "FOREIGN KEY(Username) REFERENCES Utente(Username),"
-                + "FOREIGN KEY(Id) REFERENCES File(Id)"
+                + "FOREIGN KEY(IdFile) REFERENCES File(Id)"
             + ")");
 
             File userFilesFolder = new File(USER_FILES_PATH);

@@ -19,25 +19,31 @@
        
 
         <%
-            try{
-                if(request.getMethod().equals("POST")){
-                    String user = request.getParameter("username");
-                    String password = request.getParameter("password");
+            if (session.getAttribute("user_log") != null){
+                try{
+                    if(request.getMethod().equals("POST")){
+                        String user = request.getParameter("username");
+                        String password = request.getParameter("password");
 
-                    result = statement.executeQuery("SELECT * FROM utente WHERE username = '" + user + "' AND password = '" + password + "'");
-                    if(!result.next()){ //se è vuoto
-                        out.println("<p class='error'>Username o password errati! </p>"); 
-                    } else {
-                        if (session.getAttribute("user_log") == null) {
+                        result = statement.executeQuery("SELECT * FROM utente WHERE username = '" + user + "' AND password = '" + password + "'");
+                        if(!result.next()){ //se è vuoto
+                            out.println("<p class='error'>Username o password errati! </p>"); 
+                        } else {
                             session.setAttribute("user_log", user);
+
+                            //Cookie c = new Cookie("ora_ultima_azione");
+                            //c.setMaxAge(3600);
+                            
+                            response.sendRedirect("index.jsp");
                         }
-                        response.sendRedirect("index.jsp");
                     }
+                } catch(Exception e){
+                    out.println("<p class='error'>Errore database: " + e.getMessage() + " </p>");
+                } finally{
+                    closeConnection();
                 }
-            } catch(Exception e){
-                out.println("<p class='error'>Errore database: " + e.getMessage() + " </p>");
-            } finally{
-                closeConnection();
+            } else {
+                response.sendRedirect("index.jsp");
             }
         %>
         

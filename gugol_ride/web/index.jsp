@@ -12,7 +12,7 @@
     <body>
 
         <a href="signup.jsp">SIGN UP</a>
-        <a href="login.jsp">LOGIN</a>
+        <a href="login.jsp">LOG IN</a>
         
         <%
             /*
@@ -42,7 +42,7 @@
 
             
             if(session.getAttribute("user_log") != null){
-                result = statement.executeQuery("SELECT f.* FROM utente u, permesso p, file f WHERE u.Username = p.Username AND p.Id = f.Id AND u.Username = '" + session.getAttribute("user_log") + "'");
+                result = statement.executeQuery("SELECT f.* FROM utente u, permesso p, file f WHERE u.Username = p.Username AND p.IdFile = f.Id AND u.Username = '" + session.getAttribute("user_log") + "'");
                 %>
                 <table>
                     <thead>
@@ -50,7 +50,7 @@
                             <th>Id</th>
                             <th>Path</th>
                             <th>Nome</th>
-                            <th>Tipo</th>
+                            <th>Cartella</th>
                             <th>Proprietario</th>
                         </tr>
                     </thead>
@@ -60,13 +60,18 @@
                             <td><%= result.getInt("Id") %></td>
                             <td><%= result.getString("Path") %></td>
                             <td><%= result.getString("Nome") %></td>
-                            <td><%= result.getString("Tipo") %></td>
+                            <td><%= result.getBoolean("Cartella") %></td>
                             <td><%= result.getString("Proprietario") %></td>
                         </tr>
                         <% } %>
                     </tbody>
                 </table>
+                    
+                    <hr>
+                    
+                <a href="logout.jsp">LOG OUT</a>
                 <%
+                    
             }   
         %>
     </body>

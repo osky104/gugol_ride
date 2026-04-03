@@ -19,7 +19,7 @@
        
 
         <%
-            if (session.getAttribute("user_log") != null){
+            if (session.getAttribute("user_log") == null){
                 try{
                     if(request.getMethod().equals("POST")){
                         String user = request.getParameter("username");

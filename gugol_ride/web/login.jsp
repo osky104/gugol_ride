@@ -1,4 +1,5 @@
 
+<%@page import="java.time.LocalTime"%>
 <%@include file="config.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,9 +31,10 @@
                             out.println("<p class='error'>Username o password errati! </p>"); 
                         } else {
                             session.setAttribute("user_log", user);
-
-                            //Cookie c = new Cookie("ora_ultima_azione");
-                            //c.setMaxAge(3600);
+                            
+                            Cookie c = new Cookie("ora_ultima_azione", "");
+                            c.setMaxAge(TEMPO_MASSIMO_INATTIVITA);
+                            response.addCookie(c);
                             
                             response.sendRedirect("index.jsp");
                         }

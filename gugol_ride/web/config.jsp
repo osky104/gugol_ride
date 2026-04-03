@@ -14,6 +14,7 @@
     private boolean ready = false;
     
     final String USER_FILES_PATH = "../user_files/";
+    final int TEMPO_MASSIMO_INATTIVITA = 3600;
     Connection connect = null;
     Statement statement = null;
     ResultSet result = null;
@@ -43,7 +44,7 @@
 
             statement.execute("CREATE TABLE IF NOT EXISTS File ("
                 + "Id INT AUTO_INCREMENT PRIMARY KEY,"
-                + "Path VARCHAR(267) UNIQUE NOT NULL,"
+                + "Path VARCHAR(267) NOT NULL,"
                 + "Nome VARCHAR(50) NOT NULL,"
                 + "Cartella BOOLEAN NOT NULL,"
                 + "Proprietario VARCHAR(20) NOT NULL,"

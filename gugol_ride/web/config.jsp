@@ -13,7 +13,7 @@
     private final String password = "";
     private boolean ready = false;
     
-    final String USER_FILES_PATH = "../user_files/";
+    final String USER_FILES_PATH = "user_files/";
     final int TEMPO_MASSIMO_INATTIVITA = 3600;
     Connection connect = null;
     Statement statement = null;
@@ -26,7 +26,6 @@
     }
 %>
 <%
-    out.println("<h1>TODO: cookie logout per inattività</h1>");
     try {
         Class.forName(DRIVER);
         connect = DriverManager.getConnection(URL_mioDB, userName, password);
@@ -71,7 +70,6 @@
                     userDir.mkdir();
                 }
             }
-            
             ready = true;
         }
     } catch (ClassNotFoundException e) {

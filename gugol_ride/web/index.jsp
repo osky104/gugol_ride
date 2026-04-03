@@ -15,58 +15,37 @@
         <a href="login.jsp">LOG IN</a>
         
         <%
-            /*
-            // --- 1. LOGICA SESSIONE E COOKIE ---
-            // Gestione Sessione
-            LocalDate ld = LocalDate.now();
-            if (session.getAttribute("data_corrente") == null) {
-                session.setAttribute("data_corrente", ld);
-            }
-            String dataSessione = String.valueOf(session.getAttribute("data_corrente"));
-
-            // Gestione Cookie
-            Cookie c = new Cookie("ultima_data", ld.toString());
-            c.setMaxAge(3600); // Scadenza 1 ora
-            response.addCookie(c);
-
-            String dataDaCookie = "Nessun cookie trovato (è la tua prima visita o sono scaduti)";
-            Cookie[] elencoCookie = request.getCookies();
-            if (elencoCookie != null) {
-                for (Cookie temp : elencoCookie) {
-                    if (temp.getName().equals("ultima_data")) {
-                        dataDaCookie = temp.getValue();
+            if(session.getAttribute("user_log") != null){
+                String user = session.getAttribute("user_log").toString();
+                Cookie[] elencoCookie = request.getCookies();
+                boolean check = false;
+                if (elencoCookie != null) {
+                    for (Cookie temp : elencoCookie) {
+                        if (temp.getName().equals("ora_ultima_azione")) {
+                            check = true;
+                        }
                     }
                 }
-            }
-            */
-
-            
-            if(session.getAttribute("user_log") != null){
-                result = statement.executeQuery("SELECT f.* FROM utente u, permesso p, file f WHERE u.Username = p.Username AND p.IdFile = f.Id AND u.Username = '" + session.getAttribute("user_log") + "'");
-                %>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Path</th>
-                            <th>Nome</th>
-                            <th>Cartella</th>
-                            <th>Proprietario</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% while (result.next()) { %>
-                        <tr>
-                            <td><%= result.getInt("Id") %></td>
-                            <td><%= result.getString("Path") %></td>
-                            <td><%= result.getString("Nome") %></td>
-                            <td><%= result.getBoolean("Cartella") %></td>
-                            <td><%= result.getString("Proprietario") %></td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                </table>
-                    
+                if(check){
+                    result = statement.executeQuery("SELECT f.* FROM utente u, permesso p, file f WHERE u.Username = p.Username AND p.IdFile = f.Id AND u.Username = '" + session.getAttribute("user_log") + "'");
+                
+                while (result.next()) { 
+                    if(!result.getBoolean("Cartella")){
+                        String path = new File(USER_FILES_PATH + user + "/" + result.getString("path") + result.getString("nome")).getAbsolutePath();
+                        out.println(new File(USER_FILES_PATH + user + "/" + result.getString("path") + result.getString("nome")).exists());
+                    %>
+                        
+                        <a href="<%out.println(path);%>" target="_blank">
+                            <div>
+                                <p><%= result.getString("Nome") %></p>
+                                <p><%= result.getString("Proprietario") %></p>
+                                <img src="../user_files/oscar/IMG_20170219_153238.jpg"></img>
+                            </div>
+                        </a>
+                        <% 
+                        }
+                    } %>
+                 
                 <hr>
                     
                 <form action="upload.jsp" method="post" enctype="multipart/form-data">
@@ -80,18 +59,21 @@
                 
                 <br><br><br>
                 
-                <form action="UploadController" method="post" enctype="multipart/form-data">
+                <form action="mkdir.jsp" method="post">
                     <div>
-                        <label for="folder-upload">Seleziona una cartella:</label>
-                        <input type="file" id="folder-upload" name="caricamento_file" webkitdirectory directory required>
+                        <label for="folder-upload">Nome:</label>
+                        <input type="text" id="folder-upload" name="nomeCartella" required>
                     </div>
-                    <button type="submit">Carica Intera Cartella</button>
+                    <button type="submit">Crea Cartella</button>
                 </form>
                 
                 <br><br><br>
                     
                 <a href="logout.jsp">LOG OUT</a>
                 <%
+                }else{
+                    response.sendRedirect("logout.jsp");
+                }
             }   
         %>
     </body>

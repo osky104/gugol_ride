@@ -14,14 +14,16 @@
                 try{
                     if(request.getMethod().equals("POST")){
                         String user = session.getAttribute("user_log").toString();
-                        Part filePart = request.getPart("caricamento_file");
-                        String nome  = filePart.getSubmittedFileName();
-                        File f = new File(USER_FILES_PATH + user + '/' + nome);
-                        filePart.write(f.getAbsolutePath());
+                        String nome = request.getParameter("nomeCartella");
+                        File dir = new File(USER_FILES_PATH + user + '/' + nome);
+                        if(!dir.isDirectory()){
+                            dir.mkdir();
+                        }
+                        
                         result = statement.executeQuery("SELECT * FROM file WHERE Nome = '" + nome + "' AND Proprietario = '" + user + "' AND Path = ''");
                         
                         if (!result.next()){
-                            String sql = "INSERT INTO file(Path, Nome, Cartella, Proprietario) VALUES ('', '" + nome + "', false, '"  + user + "')";
+                            String sql = "INSERT INTO file(Path, Nome, Cartella, Proprietario) VALUES ('', '" + nome + "', true, '"  + user + "')";
                         
                             PreparedStatement query = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                             query.executeUpdate();

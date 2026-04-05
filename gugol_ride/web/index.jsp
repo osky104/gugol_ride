@@ -8,11 +8,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>gugol_ride</title>
         <link rel="stylesheet" href="css/style.css">
+        <script src="jsForSend.js"></script>
     </head>
     <body>
 
         <a href="signup.jsp">SIGN UP</a>
         <a href="login.jsp">LOG IN</a>
+        
+        <br><br>
+        
+        
         <%
             if(session.getAttribute("user_log") != null){
                 String user = session.getAttribute("user_log").toString();
@@ -27,22 +32,21 @@
                 }
                 if(check){
                     result = statement.executeQuery("SELECT f.* FROM utente u, permesso p, file f WHERE u.Username = p.Username AND p.IdFile = f.Id AND u.Username = '" + session.getAttribute("user_log") + "'");
-                
-                while (result.next()) { 
-                    if(!result.getBoolean("Cartella")){
-                        String path = USER_FILES_FOLDER_NAME + user + "/" + result.getString("path") + result.getString("nome");
-        %>
-                        
-                        <a href="<%=path%>" target="_blank"> <!--target="_blank" permette di aprire il file in un'altra schermata-->
-                            <div>
-                                <p><%=result.getString("Nome")%></p>
-                                <p><%=result.getString("Proprietario")%></p>
-                            </div>
-                        </a>
-                        <% 
+
+                    while (result.next()) { 
+                        if(!result.getBoolean("Cartella")){
+                            String path = USER_FILES_FOLDER_NAME + user + "/" + result.getString("path") + result.getString("nome");
+            %>
+                            <a href="<%=path%>" target="_blank"> <!--target="_blank" permette di aprire il file in un'altra schermata-->
+                                <div >
+                                    <img src="<%=path%>" width="100px" height="100px" title="<%=result.getString("Nome")%>"  style="border: 1px solid #ccc">
+                                    <p><%=result.getString("Proprietario")%></p> 
+                                    
+                                </div>
+                            </a>
+                            <% 
                         }
                     } %>
-                 
                 <hr>
                     
                 <form action="upload.jsp" method="post" enctype="multipart/form-data">

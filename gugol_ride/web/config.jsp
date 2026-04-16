@@ -57,8 +57,8 @@
                 + "Username VARCHAR(20),"
                 + "IdFile INT,"
                 + "PRIMARY KEY (Username, IdFile),"
-                + "FOREIGN KEY(Username) REFERENCES Utente(Username),"
-                + "FOREIGN KEY(IdFile) REFERENCES File(Id)"
+                + "FOREIGN KEY(Username) REFERENCES Utente(Username) ON DELETE CASCADE,"
+                + "FOREIGN KEY(IdFile) REFERENCES File(Id) ON DELETE CASCADE"
             + ")");
             
             File userFilesFolder = new File(user_files_path);

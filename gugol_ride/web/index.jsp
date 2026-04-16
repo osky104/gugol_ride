@@ -2,6 +2,12 @@
 <%@include file="config.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<!<!--  
+        mostrare cart + path
+  eliminazione 
+
+-->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,15 +41,28 @@
 
                     while (result.next()) { 
                         if(!result.getBoolean("Cartella")){
-                            String path = USER_FILES_FOLDER_NAME + user + "/" + result.getString("path") + result.getString("nome");
+                            String path = USER_FILES_FOLDER_NAME + result.getString("proprietario") + "/" + result.getString("path") + result.getString("nome");
+                            
             %>
-                            <a href="<%=path%>" target="_blank"> <!--target="_blank" permette di aprire il file in un'altra schermata-->
-                                <div >
-                                    <img src="<%=path%>" width="100px" height="100px" title="<%=result.getString("Nome")%>"  style="border: 1px solid #ccc">
-                                    <p><%=result.getString("Proprietario")%></p> 
-                                    
-                                </div>
-                            </a>
+                            <div>
+                                <a href="<%=path%>" target="_blank"> <!--target="_blank" permette di aprire il file in un'altra schermata-->
+                                    <div >
+                                        <img src="<%=path%>" width="100px" height="100px" title="<%=result.getString("Nome")%> - <%=result.getString("Proprietario")%>"   style="border: 1px solid #ccc">
+                                     
+                                    </div>
+                                </a>
+                                        <form action="condivisione.jsp" method="POST">
+                                            <input type="text" name="share" placeholder="inserisci nome per condividere"> 
+                                            <input type="submit" value="condividi">
+                                            <input type="text" name="idFile" value="<%=result.getInt("Id")%>" hidden>
+                                        </form>
+                                        <form action="delete.jsp" method="POST">
+                                            <input type="submit" value="elimina">
+                                            <input type="text" name="idFile" value="<%=result.getInt("Id")%>" hidden>
+                                            <input name="prop" value="<%= result.getString("Proprietario").equals(user)%>" hidden>
+                                        </form>
+                            </div>
+            
                             <% 
                         }
                     } %>

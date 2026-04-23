@@ -42,7 +42,6 @@
                     while (result.next()) { 
                         if(!result.getBoolean("Cartella")){
                             String path = USER_FILES_FOLDER_NAME + result.getString("proprietario") + "/" + result.getString("path") + result.getString("nome");
-                            
             %>
                             <div>
                                 <a href="<%=path%>" target="_blank"> <!--target="_blank" permette di aprire il file in un'altra schermata-->
@@ -64,7 +63,24 @@
                             </div>
             
                             <% 
-                        }
+                        }else{
+                        %>
+                            <div>
+                                <div>
+                                    <img src="../media/cartella.png" width="100px" height="100px" title="<%=result.getString("Nome")%>">
+                                </div>
+                                <form action="condivisione.jsp" method="POST">
+                                    <input type="text" name="share" placeholder="inserisci nome per condividere"> 
+                                    <input type="submit" value="condividi">
+                                    <input type="text" name="idFile" value="<%=result.getInt("Id")%>" hidden>
+                                </form>
+                                <form action="delete.jsp" method="POST">
+                                    <input type="submit" value="elimina">
+                                    <input type="text" name="idFile" value="<%=result.getInt("Id")%>" hidden>
+                                    <input name="prop" value="<%= result.getString("Proprietario").equals(user)%>" hidden>
+                                </form>
+                            </div>
+                    <%  }
                     } %>
                 <hr>
                     

@@ -8,8 +8,15 @@
                 String id = request.getParameter("idFile");
                 
                 if(check){
-                    String sql = "DELETE FROM file WHERE Id = '" + id + "'";
-                    statement.execute(sql);
+                    result = statement.executeQuery("SELECT Nome, Proprietario FROM file WHERE Id = '" + id + "'");
+                    
+                    if(result.next()){
+                        String nome = result.getString("Nome");
+                        String proprietario = result.getString("Proprietario");
+                        statement.execute("DELETE FROM file WHERE Id = '" + id + "'");
+                        File f = new File(USER_FILES_PATH + proprietario + '/' + nome);
+                        f.delete();
+                    }
                 }else{
                     String sql = "DELETE FROM permesso WHERE IdFile = '" + id + "'";
                     statement.execute(sql);

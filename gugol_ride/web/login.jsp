@@ -6,17 +6,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css">
         <title>LOGIN</title>
     </head>
     <body>
-        <h1 style="text-align: center; color: red ">LOGIN</h1>
-        <div>
-            <form style="text-align: center" method="POST">
-                Name: <input type="text" name="username" id="username" placeholder="Inserisci username" ><br>
-                Password: <input type="password" name="password" id="password" placeholder="Inserisci password" ><br>
-                <input type="submit" value="Invia">
+        <section class="form-section">
+            <form action="" class="form-box" method="POST">
+                <h2>Login</h2>
+
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+
+
+                <div class="btn"><button type="submit" class="top-btn">Accedi</button></div>
+
+                <p>Non hai un account? <a href="signup.jsp">Registrati</a></p>
             </form>
-        </div>
+        </section>
        
 
         <%

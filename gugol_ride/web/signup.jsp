@@ -7,17 +7,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SIGN UP</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1 style="text-align: center; color: red ">SIGN UP</h1>
-        <div>
-            <form style="text-align: center" method="POST">
-                Name: <input type="text" name="username" id="username" placeholder="Inserisci username" ><br>
-                Password: <input type="password" name="password" id="password" placeholder="Inserisci password" ><br>
-                <input type="submit" value="Invia">
+        <section class="form-section">
+            <form action="" method="post" class="form-box">
+                <h2>Sign up</h2>
+
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+
+                <br><br>
+                <div class="btn"><button type="submit" class="top-btn">Registrati</button></div>
+
+                <p>Hai già un account? <a href="login.jsp">Login</a></p>
             </form>
-        </div>
-       
+        </section>
 
         <%
             try{

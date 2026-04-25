@@ -1,0 +1,250 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.back {
+    font-size: 22px;
+    text-decoration: none;
+    color: black;
+}
+
+.top-center {
+    display: flex;
+    align-items: center;
+}
+
+.top-right {
+    position: absolute;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.top-left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+}
+
+.top-btn {
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.logout-btn {
+    background: #ea4335;
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.file-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 14px;
+    text-align: center;
+    color: black;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.2s ease;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    text-decoration: none; 
+    color: black;           
+}
+
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.preview {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.icon {
+    font-size: 45px;
+    margin: 15px 0;
+}
+
+.filename {
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.owner {
+    font-size: 12px;
+    color: gray;
+}
+
+.actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    align-items: center;
+    overflow: hidden; 
+}
+
+.danger {
+    flex: 1;
+    padding: 6px;
+    border: none;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    background: #ffebee;
+    color: #d93025;
+}
+
+.share-input {
+    flex: 2;
+    max-width: 120px;
+    padding: 5px 6px;
+    font-size: 11px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+    text-align: center;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    background: white;
+    color: black;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.btn.secondary {
+    background: black;
+    color: white;
+}
+
+.form-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-box {
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+    width: 320px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.empty_anchor {
+    all: unset;
+    display: contents;
+    cursor: pointer;
+}
+
+.empty_anchor > div, button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    display: block; 
+    outline: inherit;
+    width: 110%;
+}
+
+.header-form {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.divider {
+    width: 1px;
+    height: 24px;
+    background-color: #e0e0e0;
+    margin: 0 15px;
+}
+
+.file-input {
+    font-size: 11px;
+    color: #666;
+    max-width: 180px;
+    cursor: pointer;
+}
+.file-input::file-selector-button {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #f8f9fa;
+    cursor: pointer;
+    margin-right: 8px;
+    font-family: inherit;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.file-input::file-selector-button:hover {
+    background: #ebebeb;
+    border-color: #ccc;
+}

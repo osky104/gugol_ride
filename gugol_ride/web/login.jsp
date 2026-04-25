@@ -23,10 +23,10 @@
             if (session.getAttribute("user_log") == null){
                 try{
                     if(request.getMethod().equals("POST")){
-                        String user = request.getParameter("username");
+                        String user = request.getParameter("username").toLowerCase();
                         String password = request.getParameter("password");
 
-                        result = statement.executeQuery("SELECT * FROM utente WHERE username = '" + user + "' AND password = '" + password + "'");
+                        result = statement.executeQuery("SELECT * FROM utente WHERE username = '" + user + "' AND password = SHA2('" + password + "', 256)");
                         if(!result.next()){ //se è vuoto
                             out.println("<p class='error'>Username o password errati! </p>"); 
                         } else {

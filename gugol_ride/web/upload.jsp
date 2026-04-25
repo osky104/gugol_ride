@@ -7,12 +7,15 @@
                 String user = session.getAttribute("user_log").toString();
                 Part filePart = request.getPart("caricamento_file");
                 String nome  = filePart.getSubmittedFileName();
-                File f = new File(USER_FILES_PATH + user + '/' + nome);
+                String pathFromOriginFolder = session.getAttribute("CURRENT_PATH_FROM_ORIGIN_FOLDER").toString();
+                
+                File f = new File(USER_FILES_PATH + user + '/' + pathFromOriginFolder + "/" + nome);
                 filePart.write(f.getAbsolutePath());
-                result = statement.executeQuery("SELECT * FROM file WHERE Nome = '" + nome + "' AND Proprietario = '" + user + "' AND Path = ''");
+                result = statement.executeQuery("SELECT * FROM file WHERE Nome = '" + nome + "' AND Proprietario = '" + user + "' AND Path = '" + pathFromOriginFolder + "'");
 
+                //Nel db viene inserito il file solo la prima volta che viene caricato, mentre nel file system viene sempre sovrascritto il file già presente
                 if (!result.next()){
-                    String sql = "INSERT INTO file(Path, Nome, Cartella, Proprietario) VALUES ('', '" + nome + "', false, '"  + user + "')";
+                    String sql = "INSERT INTO file(Path, Nome, Cartella, Proprietario) VALUES ('" + pathFromOriginFolder + "', '" + nome + "', false, '"  + user + "')";
 
                     PreparedStatement query = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                     query.executeUpdate();

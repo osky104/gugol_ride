@@ -7,9 +7,12 @@
         String[] names = path.split("/");
         StringBuilder newPath = new StringBuilder("");
         for (int i = 0; i < names.length - 1; i++){
-           newPath.append("/").append(names[i]);
+           newPath.append(names[i]).append("/");
         }
-        session.setAttribute("CURRENT_PATH_FROM_ORIGIN_FOLDER", newPath);
+        if (newPath.length() == 1){
+        newPath.deleteCharAt(newPath.length() - 1);
+        }
+        session.setAttribute("CURRENT_PATH_FROM_ORIGIN_FOLDER", newPath.toString());
     }
     
     response.sendRedirect("index.jsp");

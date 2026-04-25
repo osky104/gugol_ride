@@ -22,14 +22,14 @@
         <%
             try{
                 if(request.getMethod().equals("POST")){
-                    String user = request.getParameter("username");
+                    String user = request.getParameter("username").toLowerCase();
                     String password = request.getParameter("password");
                     String path = "";
 
                     result = statement.executeQuery("SELECT * FROM utente WHERE username = '" + user + "'");
                     //True se il risultato è vuoto
                     if(!result.next()){
-                        statement.execute("INSERT INTO utente(Username, Password) VALUES('"+ user + "', '"+ password + "')");
+                        statement.execute("INSERT INTO utente(Username, Password) VALUES('"+ user + "', SHA2('"+ password + "',256))");
                         
                         File userFolder = new File(USER_FILES_PATH + user);
                         userFolder.mkdir();

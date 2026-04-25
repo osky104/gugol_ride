@@ -6,15 +6,17 @@
             if(request.getMethod().equals("POST")){
                 String user = session.getAttribute("user_log").toString();
                 String nome = request.getParameter("nomeCartella");
-                File dir = new File(USER_FILES_PATH + user + '/' + nome);
+                String pathFromOriginFolder = session.getAttribute("CURRENT_PATH_FROM_ORIGIN_FOLDER").toString();
+                
+                File dir = new File(USER_FILES_PATH + user + '/' + pathFromOriginFolder + '/' + nome);
                 if(!dir.isDirectory()){
                     dir.mkdir();
                 }
 
-                result = statement.executeQuery("SELECT * FROM file WHERE Nome = '" + nome + "' AND Proprietario = '" + user + "' AND Path = ''");
+                result = statement.executeQuery("SELECT * FROM file WHERE Nome = '" + nome + "' AND Proprietario = '" + user + "' AND Path = '" + pathFromOriginFolder + "'");
 
                 if (!result.next()){
-                    String sql = "INSERT INTO file(Path, Nome, Cartella, Proprietario) VALUES ('', '" + nome + "', true, '"  + user + "')";
+                    String sql = "INSERT INTO file(Path, Nome, Cartella, Proprietario) VALUES ('" + pathFromOriginFolder + "', '" + nome + "', true, '"  + user + "')";
 
                     PreparedStatement query = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                     query.executeUpdate();

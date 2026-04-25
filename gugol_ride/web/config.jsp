@@ -42,7 +42,7 @@
             session.setAttribute("CURRENT_PATH_FROM_ORIGIN_FOLDER", "");
             statement.execute("CREATE TABLE IF NOT EXISTS Utente ("
                 + "Username VARCHAR(20) PRIMARY KEY,"
-                + "Password VARCHAR(20) NOT NULL"
+                + "Password VARCHAR(64) NOT NULL"
             + ")");
 
             statement.execute("CREATE TABLE IF NOT EXISTS File ("

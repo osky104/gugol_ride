@@ -50,14 +50,15 @@
                                     </div>
                                 </a>
                                         <form action="condivisione.jsp" method="POST">
-                                            <input type="text" name="share" placeholder="inserisci nome per condividere"> 
+                                            <input type="text" name="username" placeholder="inserisci nome per condividere"> 
                                             <input type="submit" value="condividi">
                                             <input type="text" name="idFile" value="<%=result.getInt("Id")%>" hidden>
+                                            <input type="text" name="cartella" value="false" hidden>
+                                            
                                         </form>
                                         <form action="delete.jsp" method="POST">
                                             <input type="submit" value="elimina">
                                             <input type="text" name="idFile" value="<%=result.getInt("Id")%>" hidden>
-                                            <input name="prop" value="<%= result.getString("Proprietario").equals(user)%>" hidden>
                                         </form>
                             </div>
             
@@ -72,9 +73,10 @@
                                     <input name="folderName" value="<%=result.getString("Nome")%>" hidden>
                                 </form>
                                 <form action="condivisione.jsp" method="POST">
-                                    <input type="text" name="share" placeholder="inserisci nome per condividere"> 
+                                    <input type="text" name="username" placeholder="inserisci nome per condividere"> 
                                     <input type="submit" value="condividi">
                                     <input type="text" name="idFile" value="<%=result.getInt("Id")%>" hidden>
+                                    <input type="text" name="cartella" value="true" hidden>
                                 </form>
                                 <form action="delete.jsp" method="POST">
                                     <input type="submit" value="elimina">
@@ -108,7 +110,7 @@
                 <%
                     if (session.getAttribute("CURRENT_PATH_FROM_ORIGIN_FOLDER").toString().length() > 0){
                         %>
-                        <a href="chiudiCartella.jsp" target="_blank">Esci</a>
+                        <a href="chiudiCartella.jsp">Esci</a>
                         <%
                     }
                 %>
